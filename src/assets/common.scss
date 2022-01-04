@@ -1,11 +1,13 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-ul,ol{
+
+ul, ol {
   list-style: none;
 }
+
 body {
   font: 14px/1.6 Arial, 'sans-serif', 'Microsoft YaHei', '黑体', "宋体";
   color: #333;
@@ -18,4 +20,23 @@ html, body, #app {
 a {
   text-decoration: none;
   color: #333;
+}
+
+.el-button {
+  color: rgb(0, 153, 0);
+  border: 1px solid rgba(0, 153, 51, 0.6);
+  background: #fff;
+  border-radius: 4px;
+}
+
+.el-button.el-button--medium {
+  font-size: 13px;
+  padding: 0 8px;
+  font-weight: normal;
+  line-height: 28px;
+}
+.el-button:hover {
+  color: #fff;
+  background-color: rgba(0, 153, 51, 0.6);
+  border: 1px solid rgba(0, 153, 51, 0.6);
 }
