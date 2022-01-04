@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Login",
   data() {
@@ -46,7 +47,8 @@ export default {
   methods: {
     //登录
     async login() {
-    
+      const res = await this.$http.post('/auth/login', this.model)
+      console.log(res)
     },
     //重置表单
     resetForm() {
