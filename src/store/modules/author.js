@@ -47,10 +47,14 @@ const actions = {
     return res
   },
   async toRegister({commit}, payload) {
-    const res = await author.register(payload)
-    commit('setUser', {user: res.data})
-    commit('setLogin', {isLogin: true})
-    return res
+    try {
+      const res = await author.register(payload)
+      commit('setUser', {user: res.data})
+      commit('setLogin', {isLogin: true})
+      return res
+    } catch (error) {
+      return error
+    }
   }
 }
 

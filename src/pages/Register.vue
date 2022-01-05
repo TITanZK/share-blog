@@ -47,13 +47,15 @@ export default {
     //登录
     async register() {
       const res = await this.$store.dispatch('toRegister', this.model)
-      this.$message({type: "success", message: res.msg})
-      // todo
-      // this.$router.push()
+      if (res.status === 'ok') {
+        this.$message({type: "success", message: res.msg})
+        await this.$router.push({path: '/'})
+      } else {
+        this.$message({type: "error", message: res.msg})
+      }
     },
     //重置表单
     resetForm() {
-      // console.log(this)
       this.$refs.loginFormRef.resetFields()
     }
   }
