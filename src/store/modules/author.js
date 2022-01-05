@@ -36,6 +36,12 @@ const actions = {
     commit('setUser', { user: null })
     commit('setLogin', { isLogin: false })
     return res
+  },
+  async toRegister({ commit }, payload) {
+    const res = await author.register(payload)
+    commit('setUser', { user: res.data })
+    commit('setLogin', { isLogin: true })
+    return res
   }
 }
 
