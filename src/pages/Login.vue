@@ -48,9 +48,12 @@ export default {
     //登录
     async login() {
       const res = await this.$store.dispatch('toLogin', this.model)
-      this.$message({type: "success", message: res.msg})
-      // todo
-      // this.$router.push()
+      if (res.status === 'ok') {
+        this.$message({type: "success", message: res.msg})
+        await this.$router.push('/')
+      } else {
+        this.$message({type: "error", message: res.msg})
+      }
     },
     //重置表单
     resetForm() {

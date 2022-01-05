@@ -14,7 +14,7 @@
     </template>
     <template v-if="isLogin">
       <h1>Qing 语 博 客</h1>
-      <i class="userLogin el-icon-s-custom"></i>
+      <i class="userLogin el-icon-edit"></i>
       <div class="user">
         <img class="avatar" :src="user.avatar" :alt="user.username" :title="user.username">
         <ul>
@@ -69,7 +69,7 @@ header.login {
   align-items: center;
   background: rgb(0, 153, 0);
   h1 {margin: 0;padding: 0;color: #fff;font-size: 40px;flex: 1;}
-  .userLogin {color: #fff;font-size: 30px;}
+  .userLogin {color: #fff;font-size: 30px;cursor: pointer}
   .avatar {width: 40px;height: 40px;border: 1px solid red;border-radius: 50%;margin-left: 15px;}
   .user {
     position: relative;

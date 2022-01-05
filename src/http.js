@@ -14,8 +14,12 @@ const request = (url, type = 'GET', data = {}) => {
     axios(option).then(res => {
       if (res.data.status === 'ok' && res.data.token) {
         localStorage.token = res.data.token
+        resolve(res.data)
+      } else if (res.statusText === 'OK') {
+        resolve(res.data)
+      } else {
+        reject(res.data)
       }
-      resolve(res.data)
     }).catch(() => {
       Vue.prototype.$message.error('网络异常')
       reject({msg: '网络异常'})
