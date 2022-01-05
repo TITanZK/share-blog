@@ -4,8 +4,12 @@
       <h1>Qing 语 博 客</h1>
       <p>精品博客汇聚</p>
       <div>
-        <el-button>立即登录</el-button>
-        <el-button>注册账号</el-button>
+        <el-button>
+          <router-link to="/login">立即登录</router-link>
+        </el-button>
+        <el-button>
+          <router-link to="/register">注册账号</router-link>
+        </el-button>
       </div>
     </template>
     <template v-if="isLogin">
@@ -39,8 +43,9 @@ export default {
     this.$store.dispatch('checkLogin')
   },
   methods: {
-    logout() {
-      this.$store.dispatch('logout')
+    async logout() {
+      const res = await this.$store.dispatch('toLogout')
+      this.$message({type: "success", message: res.msg})
     }
   }
 }

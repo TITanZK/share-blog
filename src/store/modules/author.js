@@ -20,7 +20,7 @@ const mutations = {
 }
 
 const actions = {
-  async login({commit}, payload) {
+  async toLogin({commit}, payload) {
     const res = await author.login(payload)
     commit('setLogin', {isLogin: true})
     commit('setUser', {user: res.data})
@@ -31,10 +31,11 @@ const actions = {
     commit('setLogin', {isLogin: res.isLogin})
     commit('setUser', {user: res.data})
   },
-  async logout({commit}){
-    await author.logout()
+  async toLogout({commit}){
+    const res = await author.logout()
     commit('setUser', { user: null })
     commit('setLogin', { isLogin: false })
+    return res
   }
 }
 

@@ -47,7 +47,7 @@ export default {
   methods: {
     //登录
     async login() {
-      const res = await this.$store.dispatch('login', this.model)
+      const res = await this.$store.dispatch('toLogin', this.model)
       this.$message({type: "success", message: res.msg})
       // todo
       // this.$router.push()

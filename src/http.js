@@ -18,7 +18,7 @@ const request = (url, type = 'GET', data = {}) => {
         }
         resolve(res.data)
       } else {
-        Vue.prototype.$message.error(res.data.msg)
+        // Vue.prototype.$message.error(res.data.msg)
         reject(res.data)
       }
     }).catch(() => {
