@@ -11,18 +11,27 @@
     <template v-if="isLogin">
       <h1>Qing 语 博 客</h1>
       <i class="userLogin el-icon-s-custom"></i>
-      <img class="avatar" src="" alt="">
+      <img class="avatar" :src="user.avatar" :alt="user.username">
     </template>
   </header>
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex"
+
 export default {
   name: "Header",
-  data() {
-    return {
-      isLogin: false
-    }
+  computed: {
+    ...mapGetters([
+      'isLogin',
+      'user'
+    ])
+  },
+  created() {
+    this.checkLogin()
+  },
+  methods: {
+    ...mapActions(['checkLogin'])
   }
 }
 </script>
@@ -58,7 +67,7 @@ header.login {
     font-size: 40px;
     flex: 1;
   }
-  .userLogin{
+  .userLogin {
     color: #fff;
     font-size: 30px;
   }
