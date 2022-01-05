@@ -12,10 +12,8 @@ const request = (url, type = 'GET', data = {}) => {
       axios.defaults.headers.common['Authorization'] = localStorage.token
     }
     axios(option).then(res => {
-      if (res.data.status === 'ok' && res.data.token) {
-        localStorage.token = res.data.token
-        resolve(res.data)
-      } else if (res.statusText === 'OK') {
+      if (res.data.status === 'ok') {
+        if (res.data.token) localStorage.token = res.data.token
         resolve(res.data)
       } else {
         reject(res.data)
