@@ -1,27 +1,32 @@
 import axios from "axios"
 import Vue from 'vue'
-import router from "@/router"
 
-const http = axios.create({
-  baseURL: '//blog-server.hunger-valley.com/',
-})
-http.interceptors.request.use(config => {
-  if (localStorage.token) {
-    axios.defaults.headers.common['Authorization'] = localStorage.token
-  }
-  return config
-}, error => {
-  return Promise.reject(error)
-})
-http.interceptors.response.use(res => res, error => {
-  if (error.response.status === 'fail') {
-    Vue.prototype.$message({
-      message: error.response.msg,
-      type: "error"
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.baseURL = '//blog-server.hunger-valley.com'
+
+const request = (url, type = 'GET', data = {}) => {
+  return new Promise((resolve, reject) => {
+    let option = {url, method: type}
+    type.toLowerCase() === 'get' ? option.params = data : option.data = data
+    if (localStorage.token) { //验证 token
+      axios.defaults.headers.common['Authorization'] = localStorage.token
+    }
+    axios(option).then(res => {
+      console.log(res.data)
+      if (res.data.status === 'ok') {
+        if (res.data.token) {
+          localStorage.token = res.data.token
+        }
+        resolve(res.data)
+      } else {
+        Vue.prototype.$message.error(res.data.msg)
+        reject(res.data)
+      }
+    }).catch(() => {
+      Vue.prototype.$message.error('网络异常')
+      reject({msg: '网络异常'})
     })
-    router.push('/')
-  }
-  return Promise.reject(error)
-})
+  })
+}
 
-export default http
+export default request

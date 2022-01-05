@@ -39,16 +39,18 @@ export default {
       },
       //绑定输入框数据
       model: {
-        username: '',
-        password: ''
+        username: 'admin12',
+        password: '123456'
       }
     }
   },
   methods: {
     //登录
     async login() {
-      const res = await this.$http.post('/auth/login', this.model)
-      console.log(res)
+      const res = await this.$store.dispatch('login', this.model)
+      this.$message({type: "success", message: res.msg})
+      // todo
+      // this.$router.push()
     },
     //重置表单
     resetForm() {
