@@ -12,15 +12,10 @@ const request = (url, type = 'GET', data = {}) => {
       axios.defaults.headers.common['Authorization'] = localStorage.token
     }
     axios(option).then(res => {
-      if (res.data.status === 'ok') {
-        if (res.data.token) {
-          localStorage.token = res.data.token
-        }
-        resolve(res.data)
-      } else {
-        // Vue.prototype.$message.error(res.data.msg)
-        reject(res.data)
+      if (res.data.status === 'ok' && res.data.token) {
+        localStorage.token = res.data.token
       }
+      resolve(res.data)
     }).catch(() => {
       Vue.prototype.$message.error('网络异常')
       reject({msg: '网络异常'})
