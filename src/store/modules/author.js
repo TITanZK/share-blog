@@ -30,6 +30,11 @@ const actions = {
     const res = await author.getInfo()
     commit('setLogin', {isLogin: res.isLogin})
     commit('setUser', {user: res.data})
+  },
+  async logout({commit}){
+    await author.logout()
+    commit('setUser', { user: null })
+    commit('setLogin', { isLogin: false })
   }
 }
 
