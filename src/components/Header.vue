@@ -3,12 +3,12 @@
     <template v-if="!isLogin">
       <h1>Qing 语 博 客</h1>
       <p>精品博客汇聚</p>
-      <div>
+      <div v-show="visibleButton">
         <router-link to="/login">
-          <el-button>立即登录</el-button>
+          <el-button @click="visibleButton=false">立即登录</el-button>
         </router-link>
         <router-link to="/register">
-          <el-button>注册账号</el-button>
+          <el-button @click="visibleButton=false">注册账号</el-button>
         </router-link>
       </div>
     </template>
@@ -33,6 +33,11 @@ import {mapGetters} from "vuex"
 
 export default {
   name: "Header",
+  data() {
+    return {
+      visibleButton: true
+    }
+  },
   computed: {
     ...mapGetters([
       'isLogin',
