@@ -21,13 +21,8 @@ export default {
     return this.getBlogs({ page, atIndex: true })
   },
 
-  createBlog({ title = '', content = '', description = '', atIndex = false } = {
-    title: '',
-    content: '',
-    description: '',
-    atIndex: false
-  }) {
-    return request('/blog', 'POST', { title, content, description, atIndex })
+  createBlog(createData) {
+    return request('/blog', 'POST', createData)
   },
 
   getBlogsByUserId(userId, { page = 1, atIndex } = { page: 1 }) {

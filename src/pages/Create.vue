@@ -3,39 +3,53 @@
     <h1>创建文章</h1>
     <h3>文章标题</h3>
     <el-input type="text"
-              v-model="title"
+              v-model="createData.title"
               placeholder="请输入内容(限50个字)"
               maxlength="50"
               show-word-limit></el-input>
     <h3>内容简介</h3>
     <el-input type="textarea"
-              v-model="description"
+              v-model="createData.description"
               placeholder="请输入简介(限150个字)"
               maxlength="150"
               show-word-limit
               :autosize="{minRows: 2, maxRows: 4}"></el-input>
     <h3>文章内容</h3>
     <el-input type="textarea"
-              v-model="content"
+              v-model="createData.content"
               placeholder="请输入正文"
+              maxlength="50000"
+              show-word-limit
               :autosize="{minRows: 4, maxRows: 30}"></el-input>
     <p>
       <label>是否展示到首页</label>
-      <el-switch v-model="atIndex" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+      <el-switch v-model="createData.atIndex" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
     </p>
-    <el-button>确定</el-button>
+    <el-button @click="onCreate">确定</el-button>
   </div>
 </template>
 
 <script>
+import blog from '@/api/blog.js'
+
 export default {
   name: "Create",
   data() {
     return {
-      title: '',
-      description: '',
-      content: '',
-      atIndex: false
+      createData: {
+        title: '',
+        description: '',
+        content: '',
+        atIndex: false
+      }
+    }
+  },
+  methods: {
+    async onCreate() {
+      const res = await blog.createBlog(this.createData)
+      console.log(res)
+      this.$message.success(res.msg)
+      await this.$router.push({ path: `/detail/${ res.data.id }` })
     }
   }
 }
