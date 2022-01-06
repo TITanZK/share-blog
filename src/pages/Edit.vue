@@ -2,12 +2,23 @@
   <div id="edit">
     <h1>编辑文章</h1>
     <h3>文章标题</h3>
-    <el-input type="text" v-model="title" placeholder="请输入内容(限50个字)" maxlength="50" show-word-limit></el-input>
+    <el-input type="text"
+              v-model="title"
+              placeholder="请输入内容(限50个字)"
+              maxlength="50"
+              show-word-limit></el-input>
     <h3>内容简介</h3>
-    <el-input type="textarea" v-model="description" placeholder="请输入简介(限150个字)" maxlength="150"
-              show-word-limit :autosize="{minRows: 2, maxRows: 6}"></el-input>
+    <el-input type="textarea"
+              v-model="description"
+              placeholder="请输入简介(限150个字)"
+              maxlength="150"
+              show-word-limit
+              :autosize="{minRows: 2, maxRows: 4}"></el-input>
     <h3>文章内容</h3>
-    <el-input type="textarea" v-model="content" placeholder="请输入正文" :autosize="{minRows: 1}"></el-input>
+    <el-input type="textarea"
+              v-model="content"
+              placeholder="请输入正文"
+              :autosize="{minRows: 4, maxRows: 30}"></el-input>
     <p>
       <label>是否展示到首页</label>
       <el-switch v-model="atIndex" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
@@ -17,17 +28,17 @@
 </template>
 
 <script>
-  export default {
-    name: "Edit",
-    data(){
-      return {
-        title: '',
-        description: '',
-        content: '',
-        atIndex: false
-      }
+export default {
+  name: "Edit",
+  data() {
+    return {
+      title: '',
+      description: '',
+      content: '',
+      atIndex: false
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

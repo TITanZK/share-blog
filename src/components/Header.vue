@@ -13,8 +13,10 @@
       </div>
     </template>
     <template v-if="isLogin">
-      <h1>Qing 语 博 客</h1>
-      <i class="userLogin el-icon-edit"></i>
+      <h1>
+        <router-link to="/">Qing 语 博 客</router-link>
+      </h1>
+      <router-link to="/create"><i class="userLogin el-icon-edit"></i></router-link>
       <div class="user">
         <img class="avatar" :src="user.avatar" :alt="user.username" :title="user.username">
         <ul>
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex"
 
 export default {
   name: "Header",
@@ -50,7 +52,7 @@ export default {
   methods: {
     async logout() {
       const res = await this.$store.dispatch('toLogout')
-      this.$message({type: "success", message: res.msg})
+      this.$message({ type: "success", message: res.msg })
     }
   }
 }
@@ -68,7 +70,10 @@ header.login {
   display: flex;
   align-items: center;
   background: rgb(0, 153, 0);
-  h1 {margin: 0;padding: 0;color: #fff;font-size: 40px;flex: 1;}
+  h1 {
+    margin: 0;padding: 0;color: #fff;font-size: 40px;flex: 1;
+    a {color: #fff;}
+  }
   .userLogin {color: #fff;font-size: 30px;cursor: pointer}
   .avatar {width: 40px;height: 40px;border: 1px solid red;border-radius: 50%;margin-left: 15px;}
   .user {

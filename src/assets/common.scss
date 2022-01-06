@@ -35,8 +35,20 @@ a {
   font-weight: normal;
   line-height: 28px;
 }
+
 .el-button:hover {
   color: #fff;
   background-color: rgba(0, 153, 51, 0.6);
   border: 1px solid #fff;
+}
+
+#edit {
+  padding-bottom: 30px;
+  h1 {text-align: center;}
+  h3 {padding: 8px 0;}
+  input, textarea {margin-bottom: 14px;}
+  p{padding: 14px 0;}
+  button{
+
+  }
 }
