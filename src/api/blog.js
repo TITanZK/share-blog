@@ -1,7 +1,7 @@
 import request from "@/http"
 
 export default {
-  getBlogs({ page = 1, userId, atIndex } = { page: 1 }) {
+  getBlogs({ page = 1, userId, atIndex }) {
     return request('/blog', 'GET', { page, userId, atIndex })
   },
 
@@ -17,7 +17,7 @@ export default {
     return request('/blog/:blogId'.replace(':blogId', blogId), 'DELETE')
   },
 
-  getIndexBlogs({ page = 1 } = { page: 1 }) {
+  getIndexBlogs(page = 1) {
     return this.getBlogs({ page, atIndex: true })
   },
 

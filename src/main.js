@@ -3,13 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import {Button, Input, Switch, Form, FormItem, Message} from 'element-ui'
+import {Button, Input, Switch, Form, FormItem, Message,Pagination} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Input)
 Vue.use(Switch)
 Vue.use(Form)
 Vue.use(FormItem)
+Vue.use(Pagination)
 
 Vue.prototype.$message = Message
 
