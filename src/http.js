@@ -6,7 +6,7 @@ axios.defaults.baseURL = '//blog-server.hunger-valley.com'
 
 const request = (url, type = 'GET', data = {}) => {
   return new Promise((resolve, reject) => {
-    let option = {url, method: type}
+    let option = { url, method: type }
     type.toLowerCase() === 'get' ? option.params = data : option.data = data
     if (localStorage.token) { //验证 token
       axios.defaults.headers.common['Authorization'] = localStorage.token
@@ -15,12 +15,14 @@ const request = (url, type = 'GET', data = {}) => {
       if (res.data.status === 'ok') {
         if (res.data.token) localStorage.token = res.data.token
         resolve(res.data)
+      } else if (res.data.msg === '请先登录') {
+        resolve(res.data)
       } else {
         reject(res.data)
       }
     }).catch(() => {
       Vue.prototype.$message.error('网络异常')
-      reject({msg: '网络异常'})
+      reject({ msg: '网络异常' })
     })
   })
 }
