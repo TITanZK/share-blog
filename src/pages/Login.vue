@@ -29,12 +29,12 @@ export default {
       //表单验证
       rules: {
         username: [
-          {required: true, message: '请输入用户名', trigger: 'blur'},
-          {min: 3, max: 15, message: '长度在 1 到 15 个字符,只能是字母数字下划线中文', trigger: 'blur'}
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 15, message: '长度在 1 到 15 个字符,只能是字母数字下划线中文', trigger: 'blur' }
         ],
         password: [
-          {required: true, message: '请输入密码', trigger: 'blur'},
-          {min: 6, max: 12, message: '长度在 6 到 16 个任意字符', trigger: 'blur'}
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 12, message: '长度在 6 到 16 个任意字符', trigger: 'blur' }
         ]
       },
       //绑定输入框数据
@@ -49,10 +49,10 @@ export default {
     async login() {
       const res = await this.$store.dispatch('toLogin', this.model)
       if (res.status === 'ok') {
-        this.$message({type: "success", message: res.msg})
-        await this.$router.push('/')
+        this.$message({ type: "success", message: res.msg })
+        await this.$router.push({ path: this.$route.query.redirect || '/' })
       } else {
-        this.$message({type: "error", message: res.msg})
+        this.$message({ type: "error", message: res.msg })
       }
     },
     //重置表单

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store/index'
 
 Vue.use(VueRouter)
 
@@ -20,29 +21,32 @@ const routes = [
     component: () => import('@/pages/Register.vue')
   },
   {
-    path: '/detail',
+    path: '/detail/:blogId',
     name: 'Detail',
     component: () => import('@/pages/Detail.vue')
   },
   {
-    path: '/edit',
+    path: '/edit/:blogId',
     name: 'Edit',
-    component: () => import('@/pages/Edit.vue')
+    component: () => import('@/pages/Edit.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/create',
     name: 'Create',
-    component: () => import('@/pages/Create.vue')
+    component: () => import('@/pages/Create.vue'),
+    meta: { requiresAuth: true }
   },
   {
-    path: '/user',
+    path: '/user/:userId',
     name: 'User',
     component: () => import('@/pages/User.vue')
   },
   {
     path: '/my',
     name: 'My',
-    component: () => import('@/pages/My.vue')
+    component: () => import('@/pages/My.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -50,4 +54,18 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLogin) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
 export default router
