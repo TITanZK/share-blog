@@ -40,6 +40,7 @@ const routes = [
   {
     path: '/user/:userId',
     name: 'User',
+    props: true,
     component: () => import('@/pages/User.vue')
   },
   {
