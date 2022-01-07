@@ -6,7 +6,7 @@
           <img :src="item.user.avatar" alt="item.user.username">
           <figcaption>{{ item.user.username }}</figcaption>
         </figure>
-        <h3>{{ item.title }} <span>{{ item.updatedAt }}</span></h3>
+        <h3>{{ item.title }} <span>{{ item.updatedAt && $formatDate(item.updatedAt) }}</span></h3>
         <p>{{ item.description }}</p>
       </router-link>
     </section>

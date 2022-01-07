@@ -3,7 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import {Button, Input, Switch, Form, FormItem, Message,Pagination} from 'element-ui'
+import { Button, Input, Switch, Form, FormItem, Message, Pagination } from 'element-ui'
+
+import formatDate from './utility.js'
+
+Vue.use(formatDate)
 
 Vue.use(Button)
 Vue.use(Input)
