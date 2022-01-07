@@ -20,6 +20,7 @@
         layout="prev, pager, next"
         :total="total"
         :current-page="page"
+        :page-size="20"
         @current-change="pageChange">
       </el-pagination>
     </section>
@@ -41,7 +42,7 @@ export default {
     }
   },
   created() {
-    this.page = this.$route.query.page || 1
+    this.page = parseInt(this.$route.query.page || '1')
     this.getBlogsByUserId()
   },
   methods: {
