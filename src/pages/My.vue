@@ -15,7 +15,7 @@
         <p>{{ item.description }}</p>
         <div class="actions">
           <router-link :to="`/edit/${item.id}`">编辑</router-link>
-          <span @click="deleteBlog(item.id)">删除</span>
+          <span @click.prevent="deleteBlog(item.id)">删除</span>
         </div>
       </router-link>
     </section>
@@ -45,13 +45,19 @@ export default {
   methods: {
     async getUserInfo() {
       const res = await blog.getBlogsByUserId(this.user.id, { page: this.page })
-      console.log(res)
       this.blogs = res.data
       this.page = res.page
       this.total = res.total
     },
-    deleteBlog() {
-      console.log(1)
+    async deleteBlog(blogId) {
+      await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      await blog.deleteBlog({ blogId })
+      this.$message.success('删除成功')
+      this.blogs = this.blogs.filter(item => item.id !== blogId)
     },
     toDate(dataString) {
       let dateObj = typeof dataString === 'object' ? dataString : new Date(dataString)
@@ -94,7 +100,7 @@ export default {
     p {grid-column: 2;grid-row: 2;margin-top: 0;}
     .actions {
       grid-column: 2;grid-row: 3;font-size: 12px;
-      a ,span{color: rgba(0, 153, 51, 0.6);margin-right: 10px;}
+      a, span {color: rgba(0, 153, 51, 0.6);margin-right: 10px;}
     }
 
   }
