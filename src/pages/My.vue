@@ -19,6 +19,15 @@
         </div>
       </router-link>
     </section>
+    <section class="pagination">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="total"
+        :current-page="page"
+        :page-size="20"
+        @current-change="onPageChange">
+      </el-pagination>
+    </section>
   </div>
 </template>
 
@@ -43,6 +52,14 @@ export default {
     this.getUserInfo()
   },
   methods: {
+    async onPageChange(currentPage) {
+      const res = await blog.getBlogsByUserId(this.user.id, { page: currentPage })
+      console.log(res)
+      this.blogs = res.data
+      this.total = res.total
+      this.page = res.page
+      await this.$router.push({ path: "/my", query: { page: currentPage } })
+    },
     async getUserInfo() {
       const res = await blog.getBlogsByUserId(this.user.id, { page: this.page })
       this.blogs = res.data
