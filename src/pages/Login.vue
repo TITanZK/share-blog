@@ -57,7 +57,6 @@ export default {
     },
     //重置表单
     resetForm() {
-      // console.log(this)
       this.$refs.loginFormRef.resetFields()
     }
   }

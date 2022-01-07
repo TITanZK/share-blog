@@ -47,7 +47,6 @@ export default {
   methods: {
     async onCreate() {
       const res = await blog.createBlog(this.createData)
-      console.log(res)
       this.$message.success(res.msg)
       await this.$router.push({ path: `/detail/${ res.data.id }` })
     }
