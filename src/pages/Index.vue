@@ -32,14 +32,6 @@ export default {
       blog: [], total: 0, page: 1
     }
   },
-  watch: {
-    $route() {
-      this.page = parseInt(this.$route.query.page || '1')
-    },
-    page() {
-      this.getPage()
-    }
-  },
   created() {
     this.getPage()
   },
