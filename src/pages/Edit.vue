@@ -23,11 +23,13 @@
       <label>是否展示到首页</label>
       <el-switch v-model="atIndex" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
     </p>
-    <el-button>确定</el-button>
+    <el-button @click="onEdit">确定</el-button>
   </div>
 </template>
 
 <script>
+import blog from '@/api/blog.js'
+
 export default {
   name: "Edit",
   data() {
@@ -35,7 +37,29 @@ export default {
       title: '',
       description: '',
       content: '',
-      atIndex: false
+      atIndex: false,
+      blogId: null,
+    }
+  },
+  created() {
+    this.blogId = this.$route.params.blogId
+    this.getDetailBlog()
+  },
+  methods: {
+    async getDetailBlog() {
+      const res = await blog.getDetail({ blogId: this.blogId })
+      this.title = res.data.title
+      this.description = res.data.description
+      this.content = res.data.content
+      this.atIndex = res.data.atIndex
+    },
+    async onEdit() {
+      const res = await blog.updateBlog(
+        { blogId: this.blogId },
+        { title: this.title, content: this.content, description: this.description, atIndex: this.atIndex })
+      console.log(res)
+      this.$message.success(res.msg)
+      await this.$router.push({ path: `/detail/${ res.data.id }` })
     }
   }
 }
