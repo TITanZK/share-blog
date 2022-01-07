@@ -1,45 +1,67 @@
 <template>
   <div id="my">
     <section class="user-info">
-      <img class="avatar" src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
-      <h3>前端</h3>
+      <img class="avatar" :src="user.avatar" :alt="user.username">
+      <h3>{{ user.username }}</h3>
     </section>
     <section>
-      <div class="item">
+      <router-link v-for="item in blogs" :to="`/detail/${item.id}`" :key="item.id" class="item">
         <div class="date">
-          <span class="day">20</span>
-          <span class="month">5月</span>
-          <span class="year">2021</span>
+          <span class="day">{{ toDate(item.createdAt).date }}</span>
+          <span class="month">{{ toDate(item.createdAt).month }}月</span>
+          <span class="year">{{ toDate(item.createdAt).year }}</span>
         </div>
-        <h3>前端异步解密</h3>
-        <p>本文以一个简单的文件读写为例，讲解了异步的不同写法，包括 普通的 callback、ES2016中的Promise和Generator、 Node 用于解决回调的co
-          模块、ES2017中的async/await。适合初步接触 Node.js以及少量 ES6语法的同学阅读...</p>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
         <div class="actions">
-          <a href="#">编辑</a>
-          <a href="#">删除</a>
+          <router-link :to="`/edit/${item.id}`">编辑</router-link>
+          <span @click="deleteBlog(item.id)">删除</span>
         </div>
-      </div>
-      <div class="item">
-        <div class="date">
-          <span class="day">20</span>
-          <span class="month">5月</span>
-          <span class="year">2021</span>
-        </div>
-        <h3>前端异步解密</h3>
-        <p>本文以一个简单的文件读写为例，讲解了异步的不同写法，包括 普通的 callback、ES2016中的Promise和Generator、 Node 用于解决回调的co
-          模块、ES2017中的async/await。适合初步接触 Node.js以及少量 ES6语法的同学阅读...</p>
-        <div class="actions">
-          <router-link to="/edit">编辑</router-link>
-          <a href="#">删除</a>
-        </div>
-      </div>
+      </router-link>
     </section>
   </div>
 </template>
 
 <script>
+import blog from '@/api/blog.js'
+import { mapGetters } from "vuex"
+
 export default {
-  name: "My"
+  name: "My",
+  data() {
+    return {
+      blogs: [],
+      page: 1,
+      total: 0
+    }
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  created() {
+    this.page = parseInt(this.$route.query.page || '1')
+    this.getUserInfo()
+  },
+  methods: {
+    async getUserInfo() {
+      const res = await blog.getBlogsByUserId(this.user.id, { page: this.page })
+      console.log(res)
+      this.blogs = res.data
+      this.page = res.page
+      this.total = res.total
+    },
+    deleteBlog() {
+      console.log(1)
+    },
+    toDate(dataString) {
+      let dateObj = typeof dataString === 'object' ? dataString : new Date(dataString)
+      return {
+        date: dateObj.getDate(),
+        month: dateObj.getMonth() + 1,
+        year: dateObj.getFullYear()
+      }
+    }
+  }
 }
 </script>
 
@@ -72,7 +94,7 @@ export default {
     p {grid-column: 2;grid-row: 2;margin-top: 0;}
     .actions {
       grid-column: 2;grid-row: 3;font-size: 12px;
-      a {color: rgba(0, 153, 51, 0.6);margin-right: 10px;}
+      a ,span{color: rgba(0, 153, 51, 0.6);margin-right: 10px;}
     }
 
   }
