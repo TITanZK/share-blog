@@ -46,9 +46,14 @@ export default {
   },
   methods: {
     async onCreate() {
-      const res = await blog.createBlog(this.createData)
-      this.$message.success(res.msg)
-      await this.$router.push({ path: `/detail/${ res.data.id }` })
+      try {
+        const res = await blog.createBlog(this.createData)
+        this.$message.success(res.msg)
+        await this.$router.push({ path: `/detail/${ res.data.id }` })
+      } catch (error) {
+        this.$message.info(error.msg)
+      }
+
     }
   }
 }

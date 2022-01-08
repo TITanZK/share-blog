@@ -67,12 +67,12 @@ export default {
       grid-column: 2;grid-row: 1;
       > span {color: #000;font-size: 12px;font-weight: normal;}
     }
-    p {grid-column: 2;grid-row: 2;margin-top: 0;
+    p {
+      grid-column: 2;grid-row: 2;margin-top: 0;
       width: 900px;
-      white-space: nowrap;
+      //white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      //border: 1px solid red;
     }
   }
   .pagination {display: flex;justify-content: center;margin-top: 24px;}
