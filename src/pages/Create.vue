@@ -55,5 +55,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+#edit {
+  h1 {padding-top: 30px;}
+}
 </style>
