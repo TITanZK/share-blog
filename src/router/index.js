@@ -57,17 +57,18 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // header 组件的按钮是否隐藏
+  if (to.path === '/login' || to.path === '/register') {
+    store.commit('setButtonVisible', false)
+  } else {
+    store.commit('setButtonVisible', true)
+  }
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    // console.log('1')
     store.dispatch('checkLogin').then(isLogin => {
-      if (!isLogin) { // 没登录重定向
-        next({ path: '/login', query: { redirect: to.fullPath } })
-      } else {
-        next()
-      }
+      // 没登录重定向
+      !isLogin ? next({ path: '/login', query: { redirect: to.fullPath } }) : next()
     })
   } else {
-    // console.log('2')
     next() // 确保一定要调用 next()
   }
 })

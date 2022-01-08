@@ -1,9 +1,11 @@
 <template>
   <header :class="{'login':isLogin,'noLogin':!isLogin}">
     <template v-if="!isLogin">
-      <h1>Qing 语 博 客</h1>
+      <h1>
+        <router-link to="/">Qing 语 博 客</router-link>
+      </h1>
       <p>精品博客汇聚</p>
-      <div>
+      <div v-if="buttonVisible">
         <router-link to="/login">
           <el-button>立即登录</el-button>
         </router-link>
@@ -35,13 +37,11 @@ import { mapGetters } from "vuex"
 
 export default {
   name: "Header",
-  data() {
-    return {}
-  },
   computed: {
     ...mapGetters([
       'isLogin',
-      'user'
+      'user',
+      'buttonVisible'
     ])
   },
   created() {
@@ -59,7 +59,9 @@ export default {
 <style scoped lang="scss">
 header.noLogin {
   padding: 0 12% 30px 12px;background: rgb(0, 153, 0);display: grid;justify-items: center;
-  h1 {color: #fff;font-size: 40px;margin: 20px 0 0 0;}
+  h1 {color: #fff;font-size: 40px;margin: 20px 0 0 0;
+    a {color: #fff;}
+  }
   p {margin: 15px 0 0 0;color: #fff;}
   button {margin: 20px 5px 0;}
 }

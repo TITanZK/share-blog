@@ -2,12 +2,14 @@ import author from '@/api/author'
 
 const state = {
   user: null,
-  isLogin: false
+  isLogin: false,
+  buttonVisible: true
 }
 
 const getters = {
   user: state => state.user,
-  isLogin: state => state.isLogin
+  isLogin: state => state.isLogin,
+  buttonVisible: state => state.buttonVisible
 }
 
 const mutations = {
@@ -16,6 +18,9 @@ const mutations = {
   },
   setUser(state, payload) {
     state.user = payload.user
+  },
+  setButtonVisible(state, value) {
+    state.buttonVisible = value
   }
 }
 
