@@ -57,7 +57,6 @@ export default {
       const res = await blog.updateBlog(
         { blogId: this.blogId },
         { title: this.title, content: this.content, description: this.description, atIndex: this.atIndex })
-      console.log(res)
       this.$message.success(res.msg)
       await this.$router.push({ path: `/detail/${ res.data.id }` })
     }

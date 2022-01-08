@@ -33,7 +33,6 @@
 
 <script>
 import blog from '@/api/blog.js'
-import { mapGetters } from "vuex"
 
 export default {
   name: "My",
@@ -41,20 +40,18 @@ export default {
     return {
       blogs: [],
       page: 1,
-      total: 0
+      total: 0,
+      user: null
     }
-  },
-  computed: {
-    ...mapGetters(['user'])
   },
   created() {
     this.page = parseInt(this.$route.query.page || '1')
+    this.user = this.$store.state.author.user
     this.getUserInfo()
   },
   methods: {
     async onPageChange(currentPage) {
       const res = await blog.getBlogsByUserId(this.user.id, { page: currentPage })
-      console.log(res)
       this.blogs = res.data
       this.total = res.total
       this.page = res.page
