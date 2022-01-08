@@ -51,6 +51,7 @@ export default {
     async logout() {
       const res = await this.$store.dispatch('toLogout')
       this.$message({ type: "success", message: res.msg })
+      await this.$router.push('/')
     }
   }
 }

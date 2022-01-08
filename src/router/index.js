@@ -2,6 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store/index'
 import Index from '@/pages/Index'
+/*
+*         重复触发了同一个路由
+* vue-router在3.1之后把$router.push()方法改为了Promise
+* 因此在使用$router.push()时如果没有处理错误回调函数，错误就会被路由全局错误处理捕获。
+* */
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 Vue.use(VueRouter)
 
