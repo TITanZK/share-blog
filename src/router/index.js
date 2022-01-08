@@ -58,6 +58,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    // console.log('1')
     store.dispatch('checkLogin').then(isLogin => {
       if (!isLogin) { // 没登录重定向
         next({ path: '/login', query: { redirect: to.fullPath } })
@@ -66,6 +67,7 @@ router.beforeEach((to, from, next) => {
       }
     })
   } else {
+    // console.log('2')
     next() // 确保一定要调用 next()
   }
 })

@@ -36,12 +36,17 @@ export default {
   },
   methods: {
     async getDetail() {
-      this.blogId = this.$route.params.blogId
-      const { data } = await blog.getDetail({ blogId: this.blogId })
-      this.title = data.title
-      this.rawContent = data.content
-      this.user = data.user
-      this.createdAt = data.createdAt
+      const blogId = parseInt(this.$route.params.blogId)
+      const res = await blog.getDetail({ blogId })
+      if (res.status === 'fail') {
+        await this.$router.push({ path: '/login', query: { redirect: this.$route.fullPath } })
+      } else {
+        this.title = res.data.title
+        this.rawContent = res.data.content
+        this.user = res.data.user
+        this.createdAt = res.data.createdAt
+      }
+
     }
   }
 }
