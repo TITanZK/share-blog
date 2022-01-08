@@ -14,7 +14,7 @@
       <el-form-item class="el-submit">
         <el-button type="primary" native-type="submit" size="medium">立即注册</el-button>
         <el-button class="button_right" size="medium" @click="resetForm">重置</el-button>
-        <p class="notice">已有账号？<a href="#">立即登录</a></p>
+        <p class="notice">已有账号？<router-link to="/login">立即登录</router-link></p>
       </el-form-item>
     </el-form>
   </div>

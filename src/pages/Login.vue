@@ -14,7 +14,7 @@
       <el-form-item class="el-submit">
         <el-button type="primary" native-type="submit" size="medium">登录</el-button>
         <el-button class="button_right" size="medium" @click="resetForm">重置</el-button>
-        <p class="notice">没有账号？<a href="#">注册新用户</a></p>
+        <p class="notice">没有账号？<router-link to="/register">注册新用户</router-link></p>
       </el-form-item>
     </el-form>
   </div>
