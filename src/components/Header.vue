@@ -2,9 +2,9 @@
   <header :class="{'login':isLogin,'noLogin':!isLogin}">
     <template v-if="!isLogin">
       <h1>
-        <router-link to="/">Qing 语 博 客</router-link>
+        <router-link to="/">Lime share blog</router-link>
       </h1>
-      <p>精品博客汇聚</p>
+      <p>共享一点点、进步一点点</p>
       <div v-if="buttonVisible">
         <router-link to="/login">
           <el-button>立即登录</el-button>
@@ -16,7 +16,7 @@
     </template>
     <template v-if="isLogin">
       <h1>
-        <router-link to="/">Qing 语 博 客</router-link>
+        <router-link to="/">Lime share blog</router-link>
       </h1>
       <router-link to="/create"><i class="userLogin el-icon-edit"></i></router-link>
       <div class="user">
@@ -59,24 +59,24 @@ export default {
 
 <style scoped lang="scss">
 header.noLogin {
-  padding: 0 12% 30px 12px;background: rgb(0, 153, 0);display: grid;justify-items: center;
-  h1 {color: #fff;font-size: 40px;margin: 20px 0 0 0;
-    a {color: #fff;}
+  padding: 0 12% 30px 12px;background: rgba(66, 184, 131, .1);display: grid;justify-items: center;
+  h1 {font-size: 30px;margin: 20px 0 0 0;
+    a {color: #3eaf7c;}
   }
-  p {margin: 15px 0 0 0;color: #fff;}
+  p {margin: 15px 0 0 0;color: #3eaf7c;}
   button {margin: 20px 5px 0;}
 }
 
 header.login {
   display: flex;
   align-items: center;
-  background: rgb(0, 153, 0);
+  background: rgba(66, 184, 131, .1);
   h1 {
-    margin: 0;padding: 0;color: #fff;font-size: 40px;flex: 1;
-    a {color: #fff;}
+    margin: 0;padding: 0;font-size: 30px;flex: 1;
+    a {color: #3eaf7c;}
   }
-  .userLogin {color: #fff;font-size: 30px;cursor: pointer}
-  .avatar {width: 40px;height: 40px;border: 1px solid red;border-radius: 50%;margin-left: 15px;}
+  .userLogin {color: #3eaf7c;font-size: 30px;cursor: pointer}
+  .avatar {width: 40px;height: 40px;border: 1px solid #42b983;border-radius: 50%;margin-left: 15px;}
   .user {
     position: relative;
     ul {

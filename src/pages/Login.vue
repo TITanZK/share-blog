@@ -83,7 +83,7 @@ export default {
   font-size: 12px;
   color: #999;
   text-align: center;
-  a {color: rgb(0, 153, 0);}
+  a {color: #3eaf7c;}
 }
 
 @media (max-width: 768px) {
