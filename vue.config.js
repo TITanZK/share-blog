@@ -1,4 +1,7 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/lime-blog/'
+    : '/',
   pwa: {
     iconPaths: {
       favicon32: 'favicon.ico',
