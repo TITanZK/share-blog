@@ -39,8 +39,8 @@ export default {
       },
       //绑定输入框数据
       model: {
-        username: 'admin12',
-        password: '123456'
+        username: '',
+        password: ''
       }
     }
   },
