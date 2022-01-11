@@ -46,12 +46,20 @@ export default {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   #app {
-    grid-template-columns: 10px auto 10px;
+    //border: 2px solid red;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header"
+                         "main"
+                         "footer";
     .header, .footer {
       padding-left: 10px;
       padding-right: 10px;
+    }
+    .main {
+      //overflow: hidden;
+      //text-overflow: ellipsis;
     }
   }
 }

@@ -69,12 +69,36 @@ export default {
     }
     p {
       grid-column: 2;grid-row: 2;margin-top: 0;
-      width: 900px;
+      max-width: 900px;
       //white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
   }
   .pagination {display: flex;justify-content: center;margin-top: 24px;}
+}
+@media (max-width: 768px) {
+  .item{
+    h3{
+      white-space : nowrap;
+      overflow : hidden;
+      text-overflow : ellipsis;
+    }
+    p{
+      max-width: 300px;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .item{
+    h3{
+      white-space : nowrap;
+      overflow : hidden;
+      text-overflow : ellipsis;
+    }
+    p{
+      max-width: 738px;
+    }
+  }
 }
 </style>
